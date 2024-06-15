@@ -16,44 +16,44 @@ public class Program
         Console.WriteLine("Заполните массив предложениями, используя разделители: пробел, запятую либо нижний слэш");
         P.InputDataToArray(ref MainRowBank);
 
-        int k = 1;
-        string[] RLine;
-        string[] ChildRowBank = new string[1];
-
-        for (int i = 0; i < MainRowBank.Length; i++)
+        if (MainRowBank[0] is not null)
         {
-            string? Sent = null;
-            RLine = MainRowBank[i].Split(Delim);
-            for (int j = 0; j < RLine.Length; j++)
+            int k = 1;
+            string[] RLine;
+            string[] ChildRowBank = new string[1];
+
+            for (int i = 0; i < MainRowBank.Length; i++)
             {
-                if (RLine[j].Length <= 3)
+                string? Sent = null;
+                RLine = MainRowBank[i].Split(Delim);
+                for (int j = 0; j < RLine.Length; j++)
                 {
+                    if (RLine[j].Length <= 3)
+                    {
 
-                    Sent = Sent + " " + RLine[j];
+                        Sent = Sent + " " + RLine[j];
+                    }
+
                 }
-
+                if (Sent != null)
+                {
+                    if (ChildRowBank[0] != null)
+                    {
+                        k = k + 1;
+                        Array.Resize(ref ChildRowBank, k);
+                    }
+                    P.ReadDataToArray(ref ChildRowBank, Sent);
+                }
             }
-            if (Sent != null)
-            {
-                k = k + 1;
-            }
-            if (k > 1)
-            {
-                Array.Resize(ref ChildRowBank, k);
-            }
-            if (Sent != null)
-            {
-                P.ReadDataToArray(ref ChildRowBank, Sent);
-            }
+            P.OutPutResult(ChildRowBank);
         }
-        P.OutPutResult(ChildRowBank);
     }
 
     void InputDataToArray(ref string[] Mas)
     {
         for (int i = 0; i < Mas.Length; i++)
         {
-            Mas[i] = Console.ReadLine();
+            Mas[i] = Console.ReadLine(); // проверка на null в основном методе
         }
     }
 
@@ -71,7 +71,7 @@ public class Program
 
     void OutPutResult(string[] Mas)
     {
-        Console.Write("Новый массив: ");
+        Console.WriteLine("Новый массив: ");
         for (int i = 0; i < Mas.Length; i++)
         {
             Console.WriteLine(Mas[i]);
