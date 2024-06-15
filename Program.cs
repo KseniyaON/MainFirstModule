@@ -8,7 +8,7 @@ public class Program
         Program P = new Program();
 
 
-        Console.Write("введите число строк");
+        Console.WriteLine("введите число строк");
         int n = Convert.ToInt32(Console.ReadLine());
         char[] Delim = { ' ', ',', '_' };
         string[] MainRowBank = new string[n];
